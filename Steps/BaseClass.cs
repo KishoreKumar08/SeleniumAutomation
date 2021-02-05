@@ -90,7 +90,7 @@ namespace SeleniumAutomation.Steps
                 driver.FindElement(By.XPath(value)).SendKeys(text + Keys.Enter);
             }
         }
-        public void Cntl_A_SendKeysAndEnter(String locatorType, String value, String text)
+        public void SelectAllSendKeysAndEnter(String locatorType, String value, String text)
         {
             if (locatorType.ToLower().Contains("id"))
             {

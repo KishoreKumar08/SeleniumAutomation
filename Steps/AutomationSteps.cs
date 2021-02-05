@@ -125,7 +125,7 @@ namespace SeleniumAutomation.Steps
             SendKeys("id", "lastName", Last_Name);
             SendKeys("id", "userEmail", Email);
             SendKeys("id", "userNumber", Mobile);
-            Cntl_A_SendKeysAndEnter("id", "dateOfBirthInput", DOB);
+            SelectAllSendKeysAndEnter("id", "dateOfBirthInput", DOB);
             ClickAndSendKeys("id", "subjectsContainer", Subject);
             SendKeys("id", "currentAddress", CurrentAddress);
         }   
