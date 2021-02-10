@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Threading;
@@ -126,13 +127,33 @@ namespace SeleniumAutomation.Steps
             SendKeys("id", "userEmail", Email);
             SendKeys("id", "userNumber", Mobile);
             SelectAllSendKeysAndEnter("id", "dateOfBirthInput", DOB);
-            ClickAndSendKeys("id", "subjectsContainer", Subject);
+            //ClickAndSendKeysAndEnter("id", "subjectsContainer", Subject);
+            IWebElement sub=driver.FindElement(By.Id("subjectsContainer"));
+            //sub.SendKeys(Subject+Keys.Down+Keys.Down);
+            Actions mouse = new Actions(driver);
+            mouse.MoveToElement(sub).Click();
+            mouse.SendKeys(Subject + Keys.Enter).Perform();
+            Thread.Sleep(3000);
+            /*WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(ExpectedConditions.ElementToBeClickable(sub));*/
             SendKeys("id", "currentAddress", CurrentAddress);
         }   
         [Then(@"I select Gender Male")]
         public void ThenISelectGenderMale()
         {
-            Click("id", "gender-radio-1");
+            Click("xpath", "//input[@id='gender-radio-2']/following-sibling::label");
+        }
+        [Then(@"I Choose an (.*) to upload")]
+        public void ThenIChooseAnToUpload(string Filepath)
+        {
+            IWebElement upload = driver.FindElement(By.ClassName("form-control-file"));
+            upload.SendKeys(Filepath.ToString());
+        }
+        [Then(@"I am selecting (.*) and (.*)")]
+        public void ThenIAmSelectingAnd(string State, string City)
+        {
+            SendKeys("id","state",State);
+            SendKeys("", "city", City);
         }
 
     }

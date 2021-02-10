@@ -82,7 +82,7 @@ namespace SeleniumAutomation.Features
 #line hidden
         }
         
-        public virtual void OpenDemoQASiteThenFillTheStudentRegistrationForm(string first_Name, string last_Name, string email, string mobile, string dOB, string subject, string current_Address, string[] exampleTags)
+        public virtual void OpenDemoQASiteThenFillTheStudentRegistrationForm(string first_Name, string last_Name, string email, string mobile, string dOB, string subject, string current_Address, string file, string state, string city, string[] exampleTags)
         {
             string[] @__tags = new string[] {
                     "mytag"};
@@ -99,6 +99,9 @@ namespace SeleniumAutomation.Features
             argumentsOfScenario.Add("DOB", dOB);
             argumentsOfScenario.Add("Subject", subject);
             argumentsOfScenario.Add("Current_Address", current_Address);
+            argumentsOfScenario.Add("File", file);
+            argumentsOfScenario.Add("State", state);
+            argumentsOfScenario.Add("City", city);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Open DemoQA Site then fill the Student Registration Form", null, tagsOfScenario, argumentsOfScenario);
 #line 31
 this.ScenarioInitialize(scenarioInfo);
@@ -136,18 +139,24 @@ this.FeatureBackground();
  testRunner.Then("I select Gender Male", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 37
+ testRunner.Then(string.Format("I Choose an {0} to upload", file), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 38
  testRunner.And("I am selecting my hobbies", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 39
+ testRunner.Then(string.Format("I am selecting {0} and {1}", state, city), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
         [TechTalk.SpecRun.ScenarioAttribute("Open DemoQA Site then fill the Student Registration Form, Automation", new string[] {
-                "mytag"}, SourceLine=40)]
+                "mytag"}, SourceLine=42)]
         public virtual void OpenDemoQASiteThenFillTheStudentRegistrationForm_Automation()
         {
 #line 31
-this.OpenDemoQASiteThenFillTheStudentRegistrationForm("Automation", "Selenium", "Test@email.com", "1234567891", "01 05 2000", "Bio-Maths", "Auto Fill Automated Address", ((string[])(null)));
+this.OpenDemoQASiteThenFillTheStudentRegistrationForm("Automation", "Selenium", "Test@email.com", "1234567891", "01 05 2000", "Computer Science", "Auto Fill Automated Address", "E:\\Selenium Codes\\Selenium often used codes.txt", "Haryana", "Panipat", ((string[])(null)));
 #line hidden
         }
     }

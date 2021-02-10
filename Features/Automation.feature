@@ -34,11 +34,13 @@ Scenario Outline: Open DemoQA Site then fill the Student Registration Form
 	Then I Choose the option Practice Form
 	Then I fill registration columns <First_Name> and <Last_Name> and <Email> and <Mobile> and <DOB> and <Subject> and <Current_Address>
 	Then I select Gender Male
+	Then I Choose an <File> to upload
 	And I am selecting my hobbies
+	Then I am selecting <State> and <City>
 
 	Examples:
-	| First_Name | Last_Name      | Email          | Mobile     | DOB		  | Subject   | Current_Address             |
-	| Automation | Selenium		  | Test@email.com | 1234567891 | 01 05 2000 | Bio-Maths | Auto Fill Automated Address |
+	| First_Name | Last_Name | Email          | Mobile     | DOB        | Subject          | Current_Address             | File                                            | State   | City    |
+	| Automation | Selenium  | Test@email.com | 1234567891 | 01 05 2000 | Computer Science | Auto Fill Automated Address | E:\Selenium Codes\Selenium often used codes.txt | Haryana | Panipat |
 
 
 

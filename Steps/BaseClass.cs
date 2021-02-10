@@ -15,7 +15,7 @@ namespace SeleniumAutomation.Steps
             {
                 driver.FindElement(By.Id(value)).Click();
             }
-            if (locator.ToLower().Contains("class"))
+            if (locator.ToLower().Contains("class") || locator.ToLower().Contains("classname"))
             {
                 driver.FindElement(By.ClassName(value)).Click();
             }
@@ -27,15 +27,14 @@ namespace SeleniumAutomation.Steps
             {
                 driver.FindElement(By.XPath(value)).Click();
             }
-        }
-        
+        }        
         public void SendKeys(String locatorType, String value, String text)
         {
             if (locatorType.ToLower().Contains("id"))
             {
                 driver.FindElement(By.Id(value)).SendKeys(text);
             }
-            if (locatorType.ToLower().Contains("class"))
+            if (locatorType.ToLower().Contains("class") || locatorType.ToLower().Contains("classname"))
             {
                 driver.FindElement(By.ClassName(value)).SendKeys(text);
             }
@@ -57,17 +56,17 @@ namespace SeleniumAutomation.Steps
             }
             if (locatorType.ToLower().Contains("class"))
             {
-                driver.FindElement(By.Id(value)).Click();
+                driver.FindElement(By.ClassName(value)).Click();
                 driver.FindElement(By.ClassName(value)).SendKeys(text);
             }
             if (locatorType.ToLower().StartsWith("name"))
             {
-                driver.FindElement(By.Id(value)).Click();
+                driver.FindElement(By.Name(value)).Click();
                 driver.FindElement(By.Name(value)).SendKeys(text);
             }
             if (locatorType.ToLower().Contains("xpath"))
             {
-                driver.FindElement(By.Id(value)).Click();
+                driver.FindElement(By.XPath(value)).Click();
                 driver.FindElement(By.XPath(value)).SendKeys(text);
             }
         }
@@ -87,6 +86,29 @@ namespace SeleniumAutomation.Steps
             }
             if (locatorType.ToLower().Contains("xpath"))
             {
+                driver.FindElement(By.XPath(value)).SendKeys(text + Keys.Enter);
+            }
+        }
+        public void ClickAndSendKeysAndEnter(String locatorType, String value, String text)
+        {
+            if (locatorType.ToLower().Contains("id"))
+            {
+                driver.FindElement(By.Id(value)).Click();
+                driver.FindElement(By.Id(value)).SendKeys(text + Keys.Enter);
+            }
+            if (locatorType.ToLower().Contains("class"))
+            {
+                driver.FindElement(By.ClassName(value)).Click();
+                driver.FindElement(By.ClassName(value)).SendKeys(text + Keys.Enter);
+            }
+            if (locatorType.ToLower().StartsWith("name"))
+            {
+                driver.FindElement(By.Name(value)).Click();
+                driver.FindElement(By.Name(value)).SendKeys(text + Keys.Enter);
+            }
+            if (locatorType.ToLower().Contains("xpath"))
+            {
+                driver.FindElement(By.XPath(value)).Click();
                 driver.FindElement(By.XPath(value)).SendKeys(text + Keys.Enter);
             }
         }
