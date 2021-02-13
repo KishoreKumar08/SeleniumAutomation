@@ -37,6 +37,7 @@ Scenario Outline: Open DemoQA Site then fill the Student Registration Form
 	Then I Choose an <File> to upload
 	And I am selecting my hobbies
 	Then I am selecting <State> and <City>
+	Then I am reading the Data provided
 
 	Examples:
 	| First_Name | Last_Name | Email          | Mobile     | DOB        | Subject          | Current_Address             | File                                            | State   | City    |

@@ -147,12 +147,15 @@ this.FeatureBackground();
 #line 39
  testRunner.Then(string.Format("I am selecting {0} and {1}", state, city), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
+#line 40
+ testRunner.Then("I am reading the Data provided", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
             }
             this.ScenarioCleanup();
         }
         
         [TechTalk.SpecRun.ScenarioAttribute("Open DemoQA Site then fill the Student Registration Form, Automation", new string[] {
-                "mytag"}, SourceLine=42)]
+                "mytag"}, SourceLine=43)]
         public virtual void OpenDemoQASiteThenFillTheStudentRegistrationForm_Automation()
         {
 #line 31

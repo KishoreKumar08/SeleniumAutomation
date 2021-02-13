@@ -3,6 +3,8 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using TechTalk.SpecFlow;
 
@@ -152,9 +154,44 @@ namespace SeleniumAutomation.Steps
         [Then(@"I am selecting (.*) and (.*)")]
         public void ThenIAmSelectingAnd(string State, string City)
         {
-            SendKeys("id","state",State);
-            SendKeys("", "city", City);
+            Click("id","state");
+            Thread.Sleep(2000);
+            Click("xpath", $"//div[text()='{State}']");
+            Thread.Sleep(2000);
+            Click("id", "city");
+            Thread.Sleep(2000);
+            Click("xpath", $"//div[text()='{City}']");
+            Thread.Sleep(2000);
+            Click("id", "submit");
         }
+        [Then(@"I am reading the Data provided")]
+        public void ThenIAmReadingTheDataProvided()
+        {
+            IWebElement table=driver.FindElement(By.ClassName("table-responsive"));
+            //Console.WriteLine(table.Text);
+            //List<IWebElement> tableData = table.FindElements(By.XPath("//table/tbody/tr")).ToList();
+            List<IWebElement> tableData = driver.FindElements(By.XPath("//div[@class='table-responsive']//tbody/tr")).ToList();
+            Console.WriteLine("Total Rows in table is "+ tableData.Count);
+            for(int i=1; i<= tableData.Count; i++)
+            {
+                List<IWebElement> tablevalues = table.FindElements(By.XPath($"//table/tbody/tr[{i}]/td")).ToList();
+                for(int j=1; j<=tablevalues.Count; j++)
+                {
+                    if(j==1)
+                    {
+                        Console.Write($"The label is {driver.FindElement(By.XPath($"//table/tbody/tr[{i}]/td[{j}]")).Text}");
+                        
+                    }
+                    else
+                    {
+                        Console.Write($" The value is {driver.FindElement(By.XPath($"//table/tbody/tr[{i}]/td[{j}]")).Text}");
+                        
+                    }
+                    Console.WriteLine();
+                }
+            }
+        }
+
 
     }
 }
