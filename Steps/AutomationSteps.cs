@@ -12,12 +12,13 @@ namespace SeleniumAutomation.Steps
 {
     [Binding]
     public sealed class AutomationSteps : BaseClass
-    {
+    {        
         [Given(@"Open chrome Browser")]
         public void GivenOpenChromeBrowser()
         {
             driver = new ChromeDriver(@"E:\Selenium\Chrome Driver 87");
             driver.Manage().Window.Maximize();
+            BasicUIFunctions();
             Thread.Sleep(2000);
         }
 
@@ -46,6 +47,25 @@ namespace SeleniumAutomation.Steps
             Click("xpath", "//div[@class='card-body']//child::h5[text()='Forms']//parent::div//parent::div");
             Thread.Sleep(2000);
         }
+        [Given(@"I Click on Alert and Frames button")]
+        public void GivenIClickOnAlertAndFramesButton()
+        {
+            Click("xpath", "//h5[contains(text(),'Alerts')]//parent::div//parent::div");
+            Thread.Sleep(2000);
+        }
+        [When(@"I click on Alerts tab")]
+        [Obsolete]
+        public void WhenIClickOnAlertsTab()
+        {            
+            // wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//div[@class='element-list collapse show']//li[2]")));
+            //mouse.MoveToElement(driver.FindElement(By.Id("item-1")));
+            var alerts = driver.FindElement(By.XPath("//span[contains(text(),'Alerts')]"));
+            var script = "arguments[0].scrollIntoView(true);";            
+            js.ExecuteScript(script, alerts);
+            Click("xpath", "//span[contains(text(),'Alerts')]");
+            Thread.Sleep(2000);
+        }
+
         [When(@"I Click on Text box tab")]
         public void WhenIClickOnTextBoxTab()
         {
@@ -131,8 +151,7 @@ namespace SeleniumAutomation.Steps
             SelectAllSendKeysAndEnter("id", "dateOfBirthInput", DOB);
             //ClickAndSendKeysAndEnter("id", "subjectsContainer", Subject);
             IWebElement sub=driver.FindElement(By.Id("subjectsContainer"));
-            //sub.SendKeys(Subject+Keys.Down+Keys.Down);
-            Actions mouse = new Actions(driver);
+            //sub.SendKeys(Subject+Keys.Down+Keys.Down)
             mouse.MoveToElement(sub).Click();
             mouse.SendKeys(Subject + Keys.Enter).Perform();
             Thread.Sleep(3000);
@@ -169,7 +188,7 @@ namespace SeleniumAutomation.Steps
         {
             IWebElement table=driver.FindElement(By.ClassName("table-responsive"));
             //Console.WriteLine(table.Text);
-            //List<IWebElement> tableData = table.FindElements(By.XPath("//table/tbody/tr")).ToList();
+            //List<IWebElement> tableDatas = table.FindElements(By.XPath("//table/tbody/tr")).ToList();
             List<IWebElement> tableData = driver.FindElements(By.XPath("//div[@class='table-responsive']//tbody/tr")).ToList();
             Console.WriteLine("Total Rows in table is "+ tableData.Count);
             for(int i=1; i<= tableData.Count; i++)
@@ -191,7 +210,38 @@ namespace SeleniumAutomation.Steps
                 }
             }
         }
+        [Then(@"I am clicking on the Close button")]
+        public void ThenIAmClickingOnTheCloseButton()
+        {
+            Click("id", "closeLargeModal");
+        }
+        [Then(@"I click on Click button to see Alert")]
+        public void ThenIClickOnClickButtonToSeeAlert()
+        {
+            Click("id", "alertButton");
+            A = driver.SwitchTo().Alert();
+            A.Accept();
+        }
 
+        [Then(@"I Click on Alert that appears after five seconds")]
+        [Obsolete]
+        public void ThenIClickOnAlertThatAppearsAfterFiveSeconds()
+        {
+            Click("id", "timerAlertButton");
+            wait.Until(ExpectedConditions.AlertIsPresent());
+        }
+
+        [Then(@"I Click on Alert with Confirm to select (.*)")]
+        public void ThenIClickOnAlertWithConfirmToSelect(string p0)
+        {
+            Click("id", "confirmButton");
+        }
+
+        [Then(@"I Click on Alert with Prompt box")]
+        public void ThenIClickOnAlertWithPromptBox()
+        {
+            Click("id", "promtButton");
+        }
 
     }
 }

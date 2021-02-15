@@ -1,5 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,7 +10,17 @@ namespace SeleniumAutomation.Steps
 {
     public class BaseClass
     { 
-        public ChromeDriver driver;
+        public static ChromeDriver driver;
+        public static Actions mouse;
+        public static IAlert A;
+        public static IJavaScriptExecutor js;
+        public static WebDriverWait wait;//= new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+        public void BasicUIFunctions()
+        {
+            mouse = new Actions(driver);
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            js = (IJavaScriptExecutor)driver;
+        }
         public void Click(String locator, String value)
         {
             if (locator.ToLower().Contains("id"))

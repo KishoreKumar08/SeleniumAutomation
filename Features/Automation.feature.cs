@@ -82,28 +82,15 @@ namespace SeleniumAutomation.Features
 #line hidden
         }
         
-        public virtual void OpenDemoQASiteThenFillTheStudentRegistrationForm(string first_Name, string last_Name, string email, string mobile, string dOB, string subject, string current_Address, string file, string state, string city, string[] exampleTags)
+        [TechTalk.SpecRun.ScenarioAttribute("Alert handling", new string[] {
+                "mytag"}, SourceLine=47)]
+        public virtual void AlertHandling()
         {
-            string[] @__tags = new string[] {
+            string[] tagsOfScenario = new string[] {
                     "mytag"};
-            if ((exampleTags != null))
-            {
-                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
-            }
-            string[] tagsOfScenario = @__tags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            argumentsOfScenario.Add("First_Name", first_Name);
-            argumentsOfScenario.Add("Last_Name", last_Name);
-            argumentsOfScenario.Add("Email", email);
-            argumentsOfScenario.Add("Mobile", mobile);
-            argumentsOfScenario.Add("DOB", dOB);
-            argumentsOfScenario.Add("Subject", subject);
-            argumentsOfScenario.Add("Current_Address", current_Address);
-            argumentsOfScenario.Add("File", file);
-            argumentsOfScenario.Add("State", state);
-            argumentsOfScenario.Add("City", city);
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Open DemoQA Site then fill the Student Registration Form", null, tagsOfScenario, argumentsOfScenario);
-#line 31
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Alert handling", null, tagsOfScenario, argumentsOfScenario);
+#line 48
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -126,41 +113,20 @@ this.ScenarioInitialize(scenarioInfo);
 #line 3
 this.FeatureBackground();
 #line hidden
-#line 33
- testRunner.Given("I click on Forms Tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 50
+ testRunner.Given("I Click on Alert and Frames button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 34
- testRunner.Then("I Choose the option Practice Form", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 51
+ testRunner.When("I click on Alerts tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 35
- testRunner.Then(string.Format("I fill registration columns {0} and {1} and {2} and {3} and {4} and {5} and {6}", first_Name, last_Name, email, mobile, dOB, subject, current_Address), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 52
+ testRunner.Then("I click on Click button to see Alert", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 36
- testRunner.Then("I select Gender Male", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-#line 37
- testRunner.Then(string.Format("I Choose an {0} to upload", file), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-#line 38
- testRunner.And("I am selecting my hobbies", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 39
- testRunner.Then(string.Format("I am selecting {0} and {1}", state, city), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-#line 40
- testRunner.Then("I am reading the Data provided", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 53
+ testRunner.And("I Click on Alert that appears after five seconds", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();
-        }
-        
-        [TechTalk.SpecRun.ScenarioAttribute("Open DemoQA Site then fill the Student Registration Form, Automation", new string[] {
-                "mytag"}, SourceLine=43)]
-        public virtual void OpenDemoQASiteThenFillTheStudentRegistrationForm_Automation()
-        {
-#line 31
-this.OpenDemoQASiteThenFillTheStudentRegistrationForm("Automation", "Selenium", "Test@email.com", "1234567891", "01 05 2000", "Computer Science", "Auto Fill Automated Address", "E:\\Selenium Codes\\Selenium often used codes.txt", "Haryana", "Panipat", ((string[])(null)));
-#line hidden
         }
     }
 }
