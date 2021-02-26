@@ -82,15 +82,15 @@ namespace SeleniumAutomation.Features
 #line hidden
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Alert handling", new string[] {
-                "mytag"}, SourceLine=47)]
-        public virtual void AlertHandling()
+        [TechTalk.SpecRun.ScenarioAttribute("Windows handling", new string[] {
+                "mytag"}, SourceLine=60)]
+        public virtual void WindowsHandling()
         {
             string[] tagsOfScenario = new string[] {
                     "mytag"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Alert handling", null, tagsOfScenario, argumentsOfScenario);
-#line 48
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Windows handling", null, tagsOfScenario, argumentsOfScenario);
+#line 61
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -113,17 +113,20 @@ this.ScenarioInitialize(scenarioInfo);
 #line 3
 this.FeatureBackground();
 #line hidden
-#line 50
+#line 63
  testRunner.Given("I Click on Alert and Frames button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 51
- testRunner.When("I click on Alerts tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 64
+ testRunner.When("I Click on Browser Windows", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 52
- testRunner.Then("I click on Click button to see Alert", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 65
+ testRunner.Then("I CLick on New tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 53
- testRunner.And("I Click on Alert that appears after five seconds", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 66
+ testRunner.Then("I Click on New Window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 67
+ testRunner.Then("I Click on New Window message", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

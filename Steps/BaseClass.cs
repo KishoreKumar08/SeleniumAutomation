@@ -11,19 +11,28 @@ namespace SeleniumAutomation.Steps
     public class BaseClass
     { 
         public static ChromeDriver driver;
+        public string ParetWindow;
         public static Actions mouse;
-        public static IAlert A;
+        //For handling pop-ups and alerts in web page
+        public static IAlert alert;
+        //For Scroll Functions
         public static IJavaScriptExecutor js;
+        public string scrollDown= "arguments[0].scrollIntoView(true);";
         public static WebDriverWait wait;//= new WebDriverWait(driver, TimeSpan.FromSeconds(10));
         public void BasicUIFunctions()
         {
             mouse = new Actions(driver);
+            //Syntax for WebDriverWait
+            //WebDriverWait w = new WebDriverWait(driver,TimeSpan.FromSeconds(20));
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             js = (IJavaScriptExecutor)driver;
+            //Syantax to switch to my alert
+            //alert = driver.SwitchTo().Alert();
         }
         public void Click(String locator, String value)
         {
             if (locator.ToLower().Contains("id"))
+
             {
                 driver.FindElement(By.Id(value)).Click();
             }

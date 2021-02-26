@@ -3,6 +3,7 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -56,12 +57,12 @@ namespace SeleniumAutomation.Steps
         [When(@"I click on Alerts tab")]
         [Obsolete]
         public void WhenIClickOnAlertsTab()
-        {            
+        {
             // wait.Until(ExpectedConditions.ElementToBeClickable(By.XPath("//div[@class='element-list collapse show']//li[2]")));
             //mouse.MoveToElement(driver.FindElement(By.Id("item-1")));
             var alerts = driver.FindElement(By.XPath("//span[contains(text(),'Alerts')]"));
-            var script = "arguments[0].scrollIntoView(true);";            
-            js.ExecuteScript(script, alerts);
+            js.ExecuteScript(scrollDown, alerts);
+            Thread.Sleep(4000);
             Click("xpath", "//span[contains(text(),'Alerts')]");
             Thread.Sleep(2000);
         }
@@ -123,8 +124,9 @@ namespace SeleniumAutomation.Steps
         {
             var state = driver.FindElement(By.Id("state"));
             var script = "arguments[0].scrollIntoView(true);";
-            IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
-            js.ExecuteScript(script, state);
+            //syntax for javaScriptExecuter
+            IJavaScriptExecutor jss = (IJavaScriptExecutor)driver;
+            jss.ExecuteScript(script, state);
             IWebElement State = driver.FindElement(By.Id("state"));
             State.Click();
             SelectElement S = new SelectElement(State);
@@ -219,8 +221,7 @@ namespace SeleniumAutomation.Steps
         public void ThenIClickOnClickButtonToSeeAlert()
         {
             Click("id", "alertButton");
-            A = driver.SwitchTo().Alert();
-            A.Accept();
+            driver.SwitchTo().Alert().Accept();
         }
 
         [Then(@"I Click on Alert that appears after five seconds")]
@@ -229,19 +230,102 @@ namespace SeleniumAutomation.Steps
         {
             Click("id", "timerAlertButton");
             wait.Until(ExpectedConditions.AlertIsPresent());
+            driver.SwitchTo().Alert().Accept();
         }
 
         [Then(@"I Click on Alert with Confirm to select (.*)")]
-        public void ThenIClickOnAlertWithConfirmToSelect(string p0)
+        public void ThenIClickOnAlertWithConfirmToSelect(string AlertAction)
         {
             Click("id", "confirmButton");
+            if (AlertAction.ToLower().Contains("ok"))
+            {
+                driver.SwitchTo().Alert().Accept();
+            }
+            if (AlertAction.ToLower().Contains("cancel"))
+            {
+                driver.SwitchTo().Alert().Dismiss();
+            }
         }
-
-        [Then(@"I Click on Alert with Prompt box")]
-        public void ThenIClickOnAlertWithPromptBox()
+        [Then(@"I Click on Alert with Prompt box with (.*)")]
+        public void ThenIClickOnAlertWithPromptBoxWith(string AlertText)
         {
             Click("id", "promtButton");
+            driver.SwitchTo().Alert().SendKeys(AlertText);
+            driver.SwitchTo().Alert().Accept();
+        }
+        [When(@"I Click on Browser Windows")]
+        public void WhenIClickOnBrowserWindows()
+        {
+            Click("xpath", "//div[@class='element-list collapse show']//li[@id='item-0']");
         }
 
+        [Then(@"I CLick on New tab")]
+        [Obsolete]
+        public void ThenICLickOnNewTab()
+        {
+           ParetWindow = driver.CurrentWindowHandle;
+            Click("id", "tabButton");
+            Console.WriteLine($"Im currently in new tab {driver.Title}");
+            //wait.Until(ExpectedConditions.ElementExists(By.Id("tabButton")));
+            driver.SwitchTo().Window(ParetWindow);
+            string title=driver.Title;
+            Console.WriteLine($"Im currently in {title} page");
+           /* var Windows=driver.WindowHandles.ToList();
+            for(int i=0;i<Windows.Count;i++)
+            {
+                driver.SwitchTo().Window(Windows[i]);
+                //driver.GetScreenshot().SaveAsFile("New tab Screenshot");
+                //driver.Close();
+            }*/
+        }
+
+        [Then(@"I Click on New Window")]
+        [Obsolete]
+        public void ThenIClickOnNewWindow()
+        {
+           // driver.Manage().Timeouts().ImplicitWait(TimeSpan.FromSeconds(10));
+            Click("id", "windowButton");
+            Console.WriteLine($"Im currently in new window {driver.Title}");
+            //wait.Until(ExpectedConditions.ElementExists(By.Id("windowButton")));
+            driver.SwitchTo().Window(ParetWindow);
+            string title = driver.Title;
+            Console.WriteLine($"Im currently in {title} page");
+        }
+
+        [Then(@"I Click on New Window message")]
+        [Obsolete]
+        public void ThenIClickOnNewWindowMessage()
+        {
+            Click("id", "messageWindowButton");
+            Console.WriteLine($"Im currently in new window {driver.Title}");
+            string windowMessage=driver.FindElement(By.XPath("//body")).Text;
+            Console.WriteLine(windowMessage);
+           //wait.Until(ExpectedConditions.ElementExists(By.Id("messageWindowButton")));
+            driver.SwitchTo().Window(ParetWindow);
+            string title = driver.Title;
+            Console.WriteLine($"Im currently in {title} page");
+        }
+        [Given(@"This is a step for data table")]
+        public void GivenThisIsAStepForDataTable(Table table)
+        {
+            string op = table.ToString();
+            string[] opp = op.Split("|");
+            HashSet<string> a = new HashSet<string>(opp); 
+            Console.WriteLine($"The length of the opp is {opp.Length}");
+            Console.WriteLine($"The length of the opp before is {a.Count}");
+            foreach (var y in a.ToHashSet())
+            {
+                if(y == "")
+                {
+                    a.Remove(""); 
+                }
+            }
+            foreach(var z in a)
+            {
+                Console.WriteLine(z);
+            }
+            Console.WriteLine($"The length of the opp after is {a.Count}");
+            //List<string> lst = new List<string>(table);
+        }
     }
 }
