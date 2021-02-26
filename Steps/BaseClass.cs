@@ -32,7 +32,6 @@ namespace SeleniumAutomation.Steps
         public void Click(String locator, String value)
         {
             if (locator.ToLower().Contains("id"))
-
             {
                 driver.FindElement(By.Id(value)).Click();
             }
